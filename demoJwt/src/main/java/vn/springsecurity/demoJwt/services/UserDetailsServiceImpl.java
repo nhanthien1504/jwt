@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.springsecurity.demoJwt.entities.User;
 import vn.springsecurity.demoJwt.repositories.UserRepository;
 
+import java.util.Optional;
+
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -16,11 +18,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+
+
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow( () -> new UsernameNotFoundException("User not found with username "+ username));
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+
+        User user = userRepository.findByUsername(username);
+
+        if (user == null)
+            throw new UsernameNotFoundException("Bad credentials");
+
         return UserDetailsImpl.build(user);
     }
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow( () -> new UsernameNotFoundException("User not found with username "+ username));
+//        return UserDetailsImpl.build(user);
+//    }
 }

@@ -3,8 +3,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import vn.springsecurity.demoJwt.entities.User;
 
-import java.util.Optional;
-
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     /**
@@ -13,7 +11,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param username
      * @return User
      */
-    Optional<User> findByUsername(String username);
+    User findByUsername(String username);
 
     /**
      * Check exists an user by user name
