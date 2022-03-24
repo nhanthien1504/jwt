@@ -9,15 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.springsecurity.demoJwt.entities.User;
 import vn.springsecurity.demoJwt.repositories.UserRepository;
 
-import java.util.Optional;
-
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-
 
 
     @Override
@@ -32,9 +29,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return UserDetailsImpl.build(user);
     }
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = userRepository.findByUsername(username)
-//                .orElseThrow( () -> new UsernameNotFoundException("User not found with username "+ username));
-//        return UserDetailsImpl.build(user);
-//    }
 }
